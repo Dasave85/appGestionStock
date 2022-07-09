@@ -1,0 +1,15 @@
+{
+  "name": "appgestionstock",
+  "version": "1.0.0",
+  "description": "app para gestion de stock almacen",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Sanchez",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^9.0.0"
+  }
+}
