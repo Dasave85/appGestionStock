@@ -69,8 +69,41 @@ const pausa = async () => {
     await inquirer.prompt(question);
 }
 
+const insertarArticulo = async () => {
+    const valor1 = [
+        {
+            type: 'input',
+            name: 'ref',
+            message: 'Introduce el numero de referencia'
+        }
+    ];
+    const valor2 = [
+        {
+            type: 'input',
+            name: 'descripcion',
+            message: 'Introduce la descripcion'
+        }
+    ];
+
+    const valor3 = [
+        {
+            type: 'input',
+            name: 'precio',
+            message: 'Introduce el precio'
+        }
+    ];
+
+    const { ref } = await inquirer.prompt(valor1);
+    const { descripcion } = await inquirer.prompt(valor2);
+    const { precio } = await inquirer.prompt(valor3);
+    
+    const articulo = { ref, descripcion, precio };
+    return articulo;
+}
+
 
 module.exports = {
     mostrarMenu,
-    pausa
+    pausa, 
+    insertarArticulo
 }
