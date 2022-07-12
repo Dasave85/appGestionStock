@@ -92,12 +92,26 @@ const insertarArticulo = async () => {
             message: 'Introduce el precio'
         }
     ];
+    
+    const valor4 = [
+        {
+            type: 'input',
+            name: 'stock',
+            message: `Intoduce unidades disponibles o pulsa ${ 'enter'.yellow }`
+        }
+    ]
 
     const { ref } = await inquirer.prompt(valor1);
     const { descripcion } = await inquirer.prompt(valor2);
     const { precio } = await inquirer.prompt(valor3);
+    const { stock } = await inquirer.prompt(valor4);
+
+    if ( !stock ){
+        const articulo = { ref, descripcion, precio };
+        return articulo;
+    }
     
-    const articulo = { ref, descripcion, precio };
+    const articulo = { ref, descripcion, precio, stock };
     return articulo;
 }
 

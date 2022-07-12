@@ -1,9 +1,10 @@
 const { mostrarMenu, pausa, insertarArticulo } = require("./helpers/inquirer");
-const { Articulos } = require('./models/articulos')
+const { Articulo } = require("./models/articulo");
+
 
 const start = async () => {
     let opcion = ''
-    const articulos = new Articulos();
+    const listadoArticulos = [];
     
 
 do {
@@ -11,12 +12,20 @@ do {
     
     switch ( opcion ){
         case '1': 
-        const articulo = await insertarArticulo();
-        console.log(articulo)
-        const { ref, descripcion, precio } = articulo;
-        articulos.crearArticulo(ref , descripcion, precio);
+            const datosArticulo = await insertarArticulo();        
+            const { ref, descripcion, precio, stock } = datosArticulo;
+            const articulo = new Articulo(ref , descripcion, precio, stock);      
+            listadoArticulos.push(articulo)
+            console.log('\nArticulo insertado'.white)
 
         break;
+
+        case '2':
+
+           console.table( listadoArticulos, ['ref', 'descripcion', 'precio', 'stock'] )
+            
+       
+                
     }
     await pausa();
 
