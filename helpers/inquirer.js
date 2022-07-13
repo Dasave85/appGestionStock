@@ -47,8 +47,8 @@ const mostrarMenu = async () => {
     console.log('     Gestion mercancias'.yellow)
     console.log('----------------------------\n');
 
-    const opcion = await inquirer.prompt(opciones)
-
+    const { opcion } = await inquirer.prompt(opciones)
+   
     return opcion;
 
 }

@@ -1,14 +1,19 @@
+const { guardarDB, leerDB } = require("./helpers/guardarDatos");
 const { mostrarMenu, pausa, insertarArticulo } = require("./helpers/inquirer");
 const { Articulo } = require("./models/articulo");
 
 
 const start = async () => {
     let opcion = ''
-    const listadoArticulos = [];
+    let listadoArticulos = [];
+
+    listadoArticulos = leerDB();
+
+    
     
 
 do {
-    const { opcion } = await mostrarMenu()
+    opcion = await mostrarMenu()
     
     switch ( opcion ){
         case '1': 
@@ -22,11 +27,17 @@ do {
 
         case '2':
 
-           console.table( listadoArticulos, ['ref', 'descripcion', 'precio', 'stock'] )
-            
+           console.table( listadoArticulos, ['ref', 'descripcion', 'precio', 'stock'] );       
        
-                
+        break;
+        
+        case '3':
+
+        break;
     }
+
+    guardarDB( listadoArticulos );
+
     await pausa();
 
     } while ( opcion !== '0' ); 
