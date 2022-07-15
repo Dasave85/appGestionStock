@@ -1,48 +1,22 @@
-const { guardarDB, leerDB } = require("./helpers/guardarDatos");
-const { mostrarMenu, pausa, insertarArticulo } = require("./helpers/inquirer");
-const { Articulo } = require("./models/articulo");
-
+const { guardarDB } = require("./helpers/guardarDatos");
+const { mostrarMenu, pausa } = require("./helpers/inquirer");
+const { opciones } = require("./helpers/opciones");
 
 const start = async () => {
-    let opcion = ''
-    let listadoArticulos = [];
+  let opcion = "";
 
-    listadoArticulos = leerDB();
+  do {
+    opcion = await mostrarMenu();
 
-    
-    
-
-do {
-    opcion = await mostrarMenu()
-    
-    switch ( opcion ){
-        case '1': 
-            const datosArticulo = await insertarArticulo();        
-            const { ref, descripcion, precio, stock } = datosArticulo;
-            const articulo = new Articulo(ref , descripcion, precio, stock);      
-            listadoArticulos.push(articulo)
-            console.log('\nArticulo insertado'.white)
-
-        break;
-
-        case '2':
-
-           console.table( listadoArticulos, ['ref', 'descripcion', 'precio', 'stock'] );       
-       
-        break;
-        
-        case '3':
-
-        break;
+    if (opcion > 0 && opcion < 7) {
+      await opciones[opcion]();
     }
 
-    guardarDB( listadoArticulos );
+    const { listadoArticulos } = require("./helpers/opciones");
+    guardarDB(listadoArticulos);
 
     await pausa();
-
-    } while ( opcion !== '0' ); 
-}
-
-
+  } while (opcion !== "0");
+};
 
 start();

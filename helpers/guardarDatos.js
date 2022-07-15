@@ -10,7 +10,7 @@ const guardarDB = ( data ) => {
 const leerDB = () => {
 
    if( !fs.existsSync( path )){
-        return null;
+        return [];
    }
 
    const info = fs.readFileSync( path, 'utf-8');
